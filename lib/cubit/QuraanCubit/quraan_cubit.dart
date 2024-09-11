@@ -14,9 +14,9 @@ class QuraanCubit extends Cubit<QuraanState> {
   void getQuraanData() async {
     final response = await rootBundle.loadString('assets/jsons/Quran.json');
     final data = json.decode(response) as List;
-  
+
     final quraan = data.map((quran) => MainQuranModel.fromjson(quran)).toList();
-   
+
     emit(QuraanLoaded(quraan));
   }
 }

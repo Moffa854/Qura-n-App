@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../Core/Constant/color_app.dart';
 import '../../../../../../Core/Constant/sizes_app.dart';
-import '../../../../../../cubit/last_read_cubit.dart';
+import '../../../../../../cubit/Last Read/last_read_cubit.dart';
 
 class TextLastSurahName extends StatelessWidget {
   const TextLastSurahName({

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../Core/Constant/sizes_app.dart';
 import '../../../../../../Core/Widget/create_slide_transation.dart';
 import '../../../../../../Data/Models/Quraan/main_quran_model.dart';
-import '../../../../../../cubit/last_read_cubit.dart';
+import '../../../../../../cubit/Last Read/last_read_cubit.dart';
 import '../../AyahPage/Screens/ayah_page.dart';
 import 'english_arabic_name_surah.dart';
 

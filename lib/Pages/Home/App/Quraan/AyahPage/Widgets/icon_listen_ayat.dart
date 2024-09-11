@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../Core/Constant/color_app.dart';
-import '../../../../../../cubit/audio_quraan_cubit.dart';
-import '../../../../../../cubit/boolvisibility_cubit.dart';
+import '../../../../../../cubit/Audio/audio_quraan_cubit.dart';
+import '../../../../../../cubit/Bool/boolvisibility_cubit.dart';
 
 class IconListenAyat extends StatelessWidget {
   const IconListenAyat({

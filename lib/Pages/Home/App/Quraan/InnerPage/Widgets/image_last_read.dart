@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quraan_app1/Core/Constant/color_app.dart';
 
 import '../../../../../../Core/Constant/images_app.dart';
 
@@ -14,6 +15,7 @@ class ImageLastRead extends StatelessWidget {
       child: Image.asset(
         ImagesApp.lastread,
         fit: BoxFit.contain,
+        color: ColorApp.purple,
       ),
     );
   }

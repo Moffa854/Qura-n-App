@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:quraan_app1/cubit/prayertimes_state.dart';
+import 'package:quraan_app1/cubit/Prayer%20Times/prayertimes_state.dart';
 
 
 class PrayerTimesCubit extends Cubit<PrayerTimesState> {

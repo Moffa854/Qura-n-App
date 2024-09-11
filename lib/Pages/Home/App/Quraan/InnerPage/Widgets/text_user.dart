@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../Core/Constant/color_app.dart';
 import '../../../../../../Core/Constant/sizes_app.dart';
-import '../../../../../../cubit/username_cubit.dart';
+import '../../../../../../cubit/Username/username_cubit.dart';
 
 class TextUser extends StatelessWidget {
   const TextUser({

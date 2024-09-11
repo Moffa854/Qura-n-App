@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import '../../../../Core/Constant/color_app.dart';
-import '../../../../cubit/boolvisibility_cubit.dart';
+import '../../../../cubit/Bool/boolvisibility_cubit.dart';
 import '../../Widgets/custom_text_form_feild.dart';
 
 class ThreeTextFormField extends StatelessWidget {

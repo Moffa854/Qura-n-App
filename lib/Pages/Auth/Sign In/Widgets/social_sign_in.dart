@@ -6,8 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../Core/Constant/images_app.dart';
 import '../../../../Core/Constant/sizes_app.dart';
 import '../../../../Core/Widget/create_slide_transation.dart';
-import '../../../../cubit/username_cubit.dart';
-import '../../../Home/home_page.dart';
+import '../../../../cubit/Username/username_cubit.dart';
+import '../../../Home/Screens/home_page.dart';
 
 class SocialSignIn extends StatelessWidget {
   const SocialSignIn({
