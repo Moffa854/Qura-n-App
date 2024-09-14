@@ -5,6 +5,7 @@ import 'package:quraan_app1/Core/Constant/sizes_app.dart';
 import 'package:quraan_app1/Core/Widget/create_slide_transation.dart';
 import 'package:quraan_app1/Data/Models/Quraan/main_quran_model.dart';
 import 'package:quraan_app1/Pages/Home/App/Quraan/AyahPage/Screens/ayah_page.dart';
+
 import '../../../../../../cubit/QuraanCubit/quraan_cubit.dart';
 
 class SearchDelegateWidget extends SearchDelegate {
@@ -57,7 +58,8 @@ class SearchDelegateWidget extends SearchDelegate {
 
   List<MainQuranModel> _filterQuranList(List<MainQuranModel> quranList) {
     return quranList.where((quran) {
-      return quran.name.toLowerCase().contains(query.toLowerCase());
+      return quran.name.toLowerCase().contains(query.toLowerCase()) ||
+          quran.name_translation.toLowerCase().contains(query.toLowerCase());
     }).toList();
   }
 
@@ -74,7 +76,8 @@ class SearchDelegateWidget extends SearchDelegate {
     );
   }
 
-  Widget _buildResultsList(List<MainQuranModel> filteredResults, BuildContext context) {
+  Widget _buildResultsList(
+      List<MainQuranModel> filteredResults, BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ListView.builder(

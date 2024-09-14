@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
+import 'package:quraan_app1/Pages/Home/App/Qiblah/Screens/qiblah_page.dart';
 
 import '../../../Core/Constant/color_app.dart';
 import '../../../Core/Widget/create_slide_transation.dart';
@@ -67,13 +68,9 @@ class HomePage extends StatelessWidget {
 
           LocationData currentPosition = snapshot.data!;
 
-
           return Scaffold(
-
-
             key: _scaffoldKey,
             drawer: _buildDrawer(context),
-
             body: _buildBody(context, currentPosition),
             bottomNavigationBar: _buildBottomNavigationBar(context),
           );
@@ -131,6 +128,7 @@ class HomePage extends StatelessWidget {
             DatePickerPrayerTimes(
               currentPosition: currentPosition,
             ),
+            const QiblahPage()
           ],
         );
       },
@@ -153,13 +151,24 @@ class HomePage extends StatelessWidget {
   void _onNavigationItemTapped(BuildContext context, int index) {
     switch (index) {
       case 0:
-        context.read<BottomNavigationBarCubit>().updateIndex(NavigtionBarItem.azkaar);
+        context
+            .read<BottomNavigationBarCubit>()
+            .updateIndex(NavigtionBarItem.azkaar);
         break;
       case 1:
-        context.read<BottomNavigationBarCubit>().updateIndex(NavigtionBarItem.quraan);
+        context
+            .read<BottomNavigationBarCubit>()
+            .updateIndex(NavigtionBarItem.quraan);
         break;
       case 2:
-        context.read<BottomNavigationBarCubit>().updateIndex(NavigtionBarItem.prayer);
+        context
+            .read<BottomNavigationBarCubit>()
+            .updateIndex(NavigtionBarItem.prayer);
+        break;
+      case 3:
+        context
+            .read<BottomNavigationBarCubit>()
+            .updateIndex(NavigtionBarItem.qiblah);
         break;
     }
   }
@@ -168,17 +177,30 @@ class HomePage extends StatelessWidget {
     return [
       Icon(
         Icons.book_sharp,
-        color: curentItem == NavigtionBarItem.azkaar ? ColorApp.lightPink : ColorApp.heavyPink,
+        color: curentItem == NavigtionBarItem.azkaar
+            ? ColorApp.lightPink
+            : ColorApp.heavyPink,
         size: curentItem == NavigtionBarItem.azkaar ? 40 : 20,
       ),
       Icon(
         Icons.menu_book_sharp,
-        color: curentItem == NavigtionBarItem.quraan ? ColorApp.lightPink : ColorApp.heavyPink,
+        color: curentItem == NavigtionBarItem.quraan
+            ? ColorApp.lightPink
+            : ColorApp.heavyPink,
         size: curentItem == NavigtionBarItem.quraan ? 40 : 20,
       ),
       Icon(
         Icons.mosque,
-        color: curentItem == NavigtionBarItem.prayer ? ColorApp.lightPink : ColorApp.heavyPink,
+        color: curentItem == NavigtionBarItem.prayer
+            ? ColorApp.lightPink
+            : ColorApp.heavyPink,
+        size: curentItem == NavigtionBarItem.prayer ? 40 : 20,
+      ),
+      Icon(
+        Icons.explore,
+        color: curentItem == NavigtionBarItem.prayer
+            ? ColorApp.lightPink
+            : ColorApp.heavyPink,
         size: curentItem == NavigtionBarItem.prayer ? 40 : 20,
       ),
     ];

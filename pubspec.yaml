@@ -37,15 +37,18 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_compass: ^0.8.0
+  flutter_compass_v2: ^1.0.3
+  flutter_qiblah: ^3.0.4
   flutter_svg: ^2.0.10+1
-  geolocator: 12.0.0
+  geolocator: ^13.0.1
   google_sign_in: ^6.2.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   http: ^1.2.2
   intl: ^0.19.0
   just_audio: ^0.9.40
-  location: ^7.0.0
+  location: ^6.0.2
   path_provider: ^2.1.4
 
 dev_dependencies:

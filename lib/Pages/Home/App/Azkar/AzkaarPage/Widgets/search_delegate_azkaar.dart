@@ -6,6 +6,7 @@ import 'package:quraan_app1/Core/Widget/create_slide_transation.dart';
 import 'package:quraan_app1/Data/Models/Azkaar/main_azkaar_model.dart';
 import 'package:quraan_app1/Pages/Home/App/Azkar/ContentAzkaar/Screens/content_azkaar.dart';
 import 'package:quraan_app1/cubit/AzkaarCubit/azkaar_cubit.dart';
+
 import 'stack_muslim_image.dart';
 
 class SearchDelegateWidget2 extends SearchDelegate {
@@ -59,14 +60,15 @@ class SearchDelegateWidget2 extends SearchDelegate {
 
   List<MainAzkaarModel> _filterAzkaarList(List<MainAzkaarModel> azkaarList) {
     return azkaarList.where((azkaar) {
-      return azkaar.category.toLowerCase().contains(query.toLowerCase());
+      return azkaar.category.toLowerCase().contains(query.toLowerCase()) ||
+          azkaar.id.toString().contains(query.toLowerCase());
     }).toList();
   }
 
   Widget _buildEmptyResults() {
     return const Center(
       child: Text(
-        'لا توجد سورة بهذا الإسم',
+        'لا يوجد ذكر بهذا الإسم',
         style: TextStyle(
           color: ColorApp.purple,
           fontFamily: 'Lateef Regular',
@@ -76,7 +78,8 @@ class SearchDelegateWidget2 extends SearchDelegate {
     );
   }
 
-  Widget _buildResultsList(List<MainAzkaarModel> filteredResults, BuildContext context) {
+  Widget _buildResultsList(
+      List<MainAzkaarModel> filteredResults, BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ListView.builder(

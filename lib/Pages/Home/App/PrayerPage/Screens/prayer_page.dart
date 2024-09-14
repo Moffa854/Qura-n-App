@@ -16,7 +16,7 @@ class DatePickerPrayerTimes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // جلب أوقات الصلاة للتاريخ الحالي عند بناء الواجهة
+    
     context.read<PrayerTimesCubit>().fetchPrayerTimes(
           currentPosition.latitude!,
           currentPosition.longitude!,
@@ -25,6 +25,7 @@ class DatePickerPrayerTimes extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         title: const Text(
           'Prayer',

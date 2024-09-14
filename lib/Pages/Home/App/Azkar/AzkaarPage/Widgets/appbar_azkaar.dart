@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quraan_app1/Pages/Home/App/Azkar/AzkaarPage/Widgets/container_search_azkaar.dart';
 
-
 import '../../../../../../Core/Constant/color_app.dart';
 import '../../../../../../Core/Constant/sizes_app.dart';
 
