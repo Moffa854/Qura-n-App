@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
-import 'package:quraan_app1/Pages/Home/App/Qiblah/qiblah_compass.dart';
+
+import '../Widgets/qiblah_compass.dart';
 
 class QiblahPage extends StatefulWidget {
   const QiblahPage({super.key});
@@ -10,29 +11,27 @@ class QiblahPage extends StatefulWidget {
 }
 
 class _QiblahPageState extends State<QiblahPage> {
-  final _deviceSupport = FlutterQiblah.androidDeviceSensorSupport();
+  final Future<bool?> _deviceSupport =
+      FlutterQiblah.androidDeviceSensorSupport();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
+      body: FutureBuilder<bool?>(
         future: _deviceSupport,
-        builder: (_, AsyncSnapshot<bool?> snapshot) {
+        builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(
-              child: Text("Error: ${snapshot.error.toString()}"),
-            );
-          }
-          if (snapshot.data!) {
-            return QiblahCompass();
-          } else {
             return const Center(
-              child: Text("Your device is not supported"),
-            );
+                child: Text('Your Device hardware doesn’t support the sensor'));
+          }
+          // Check for null value and use fallback for unsupported devices
+          if (snapshot.data == true) {
+            return const QiblahCompass();
+          } else {
+            return const Center(child: Text("Your device is not supported"));
           }
         },
       ),

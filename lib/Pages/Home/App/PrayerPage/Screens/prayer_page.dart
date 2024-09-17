@@ -16,7 +16,6 @@ class DatePickerPrayerTimes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     context.read<PrayerTimesCubit>().fetchPrayerTimes(
           currentPosition.latitude!,
           currentPosition.longitude!,

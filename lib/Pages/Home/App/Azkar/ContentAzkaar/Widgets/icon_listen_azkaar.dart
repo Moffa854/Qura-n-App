@@ -24,18 +24,15 @@ class IconListenAzkaar extends StatelessWidget {
           if (audioState == AudioState.loading) {
             return const CircularProgressIndicator();
           }
-        
+
+          final audioIndex = (id - 1).toInt();
+          assert(audioIndex >= 0 && audioIndex < audioFiles.length,
+              "Invalid index for audioFiles: $audioIndex");
+
           return IconButton(
             onPressed: () {
               context.read<BoolvisibilityCubit>().taggel();
-              int audioIndex = (id - 1).toInt();
-              if (audioIndex >= 0 && audioIndex < audioFiles.length) {
-                context
-                    .read<AudioCubit>()
-                    .toggleAudio(audioFiles[audioIndex]);
-              } else {
-                print("Error: Invalid index for audioFiles.");
-              }
+              context.read<AudioCubit>().toggleAudio(audioFiles[audioIndex]);
             },
             icon: audioState == AudioState.playing
                 ? const Icon(

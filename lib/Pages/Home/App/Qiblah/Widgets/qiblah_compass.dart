@@ -1,34 +1,35 @@
 import 'dart:async';
-import 'dart:math' show pi;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'location_error_widget.dart';
+import 'qiblah_compass_widget.dart';
 
 class QiblahCompass extends StatefulWidget {
+  const QiblahCompass({super.key});
+
   @override
   _QiblahCompassState createState() => _QiblahCompassState();
 }
 
 class _QiblahCompassState extends State<QiblahCompass> {
-  final _locationStreamController = StreamController<LocationStatus>.broadcast();
+  final _locationStreamController =
+      StreamController<LocationStatus>.broadcast();
 
   get stream => _locationStreamController.stream;
 
   Future<void> _checkLocationStatus() async {
-    // before running the app please enable your location
-
     final locationStatus = await FlutterQiblah.checkLocationStatus();
     if (locationStatus.enabled &&
         locationStatus.status == LocationPermission.denied) {
       await FlutterQiblah.requestPermissions();
       final s = await FlutterQiblah.checkLocationStatus();
       _locationStreamController.sink.add(s);
-    } else
+    } else {
       _locationStreamController.sink.add(locationStatus);
+    }
   }
 
   @override
@@ -39,9 +40,9 @@ class _QiblahCompassState extends State<QiblahCompass> {
 
   @override
   void dispose() {
-    super.dispose();
     _locationStreamController.close();
     FlutterQiblah().dispose();
+    super.dispose();
   }
 
   @override
@@ -49,15 +50,13 @@ class _QiblahCompassState extends State<QiblahCompass> {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(8.0),
-      child: StreamBuilder(
+      child: StreamBuilder<LocationStatus>(
         stream: stream,
-        builder: (context, AsyncSnapshot<LocationStatus> snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
-          if (snapshot.data!.enabled == true) {
+          if (snapshot.data!.enabled) {
             switch (snapshot.data!.status) {
               case LocationPermission.always:
               case LocationPermission.whileInUse:
@@ -70,7 +69,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
                 );
               case LocationPermission.deniedForever:
                 return LocationErrorWidget(
-                  error: "Location service Denied Forever !",
+                  error: "Location service Denied Forever!",
                   callback: _checkLocationStatus,
                 );
               default:
@@ -84,51 +83,6 @@ class _QiblahCompassState extends State<QiblahCompass> {
           }
         },
       ),
-    );
-  }
-
-}
-
-class QiblahCompassWidget extends StatelessWidget {
-  final _compassSvg = SvgPicture.asset('assets/svg/compass.svg');
-  final _needleSvg = SvgPicture.asset(
-    'assets/svg/needle.svg',
-    fit: BoxFit.contain,
-    height: 300,
-    alignment: Alignment.center,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FlutterQiblah.qiblahStream,
-      builder: (_, AsyncSnapshot<QiblahDirection> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting)
-          {
-            return const Center(child: CircularProgressIndicator(),);
-          }
-
-        final qiblahDirection = snapshot.data!;
-
-        return Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Transform.rotate(
-              angle: (qiblahDirection.direction * (pi / 180) * -1),
-              child: _compassSvg,
-            ),
-            Transform.rotate(
-              angle: (qiblahDirection.qiblah * (pi / 180) * -1),
-              alignment: Alignment.center,
-              child: _needleSvg,
-            ),
-            Positioned(
-              bottom: 8,
-              child: Text("${qiblahDirection.offset.toStringAsFixed(3)}°"),
-            )
-          ],
-        );
-      },
     );
   }
 }

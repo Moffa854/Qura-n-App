@@ -180,28 +180,28 @@ class HomePage extends StatelessWidget {
         color: curentItem == NavigtionBarItem.azkaar
             ? ColorApp.lightPink
             : ColorApp.heavyPink,
-        size: curentItem == NavigtionBarItem.azkaar ? 40 : 20,
+        size: curentItem == NavigtionBarItem.azkaar ? 30 : 20,
       ),
       Icon(
         Icons.menu_book_sharp,
         color: curentItem == NavigtionBarItem.quraan
             ? ColorApp.lightPink
             : ColorApp.heavyPink,
-        size: curentItem == NavigtionBarItem.quraan ? 40 : 20,
+        size: curentItem == NavigtionBarItem.quraan ? 30 : 20,
       ),
       Icon(
         Icons.mosque,
         color: curentItem == NavigtionBarItem.prayer
             ? ColorApp.lightPink
             : ColorApp.heavyPink,
-        size: curentItem == NavigtionBarItem.prayer ? 40 : 20,
+        size: curentItem == NavigtionBarItem.prayer ? 30 : 20,
       ),
       Icon(
         Icons.explore,
-        color: curentItem == NavigtionBarItem.prayer
+        color: curentItem == NavigtionBarItem.qiblah
             ? ColorApp.lightPink
             : ColorApp.heavyPink,
-        size: curentItem == NavigtionBarItem.prayer ? 40 : 20,
+        size: curentItem == NavigtionBarItem.qiblah ? 30 : 20,
       ),
     ];
   }

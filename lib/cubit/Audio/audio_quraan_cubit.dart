@@ -11,9 +11,15 @@ class AudioCubit extends Cubit<AudioState> {
       if (playerState.playing) {
         emit(AudioState.playing);
       } else if (playerState.processingState == ProcessingState.loading ||
-                 playerState.processingState == ProcessingState.buffering) {
+          playerState.processingState == ProcessingState.buffering) {
         emit(AudioState.loading);
       } else {
+        emit(AudioState.stopped);
+      }
+    });
+
+    _audioPlayer.positionStream.listen((position) {
+      if (position >= (_audioPlayer.duration ?? Duration.zero)) {
         emit(AudioState.stopped);
       }
     });
@@ -29,11 +35,11 @@ class AudioCubit extends Cubit<AudioState> {
 
       currentAudio = audioPath;
       try {
-        final String downloadUrl = await FirebaseStorage.instance
-            .ref(audioPath)
-            .getDownloadURL();
+        final String downloadUrl =
+            await FirebaseStorage.instance.ref(audioPath).getDownloadURL();
         await _audioPlayer.setUrl(downloadUrl);
         await _audioPlayer.play();
+        await _audioPlayer.stop();
       } catch (e) {
         emit(AudioState.error);
         print("Error loading audio: $e");
@@ -52,4 +58,5 @@ class AudioCubit extends Cubit<AudioState> {
     return super.close();
   }
 }
+
 enum AudioState { stopped, loading, playing, error }
