@@ -40,10 +40,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const QuranApp(),
-  ));
+  runApp(
+    DevicePreview(
+        enabled: !kReleaseMode, builder: (context) => const QuranApp()),
+  );
 }
 
 class QuranApp extends StatelessWidget {
@@ -110,10 +110,14 @@ class AuthenticationWrapper extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final User? user = snapshot.data;
           if (user == null) {
-            print('User is currently signed out!');
+            if (!kReleaseMode) {
+              debugPrint('User is currently signed out!');
+            }
             return const StartPage();
           } else {
-            print('User is signed in!');
+            if (!kReleaseMode) {
+              debugPrint('User is signed in!');
+            }
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Navigator.of(context).pushReplacement(

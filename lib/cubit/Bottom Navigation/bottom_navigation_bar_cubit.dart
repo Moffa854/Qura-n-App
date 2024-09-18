@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum NavigtionBarItem { azkaar, quraan, prayer,qiblah }
+enum NavigtionBarItem { azkaar, quraan, prayer }
 
 class BottomNavigationBarCubit extends Cubit<NavigtionBarItem> {
   BottomNavigationBarCubit(

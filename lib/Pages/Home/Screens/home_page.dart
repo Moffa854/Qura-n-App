@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
-import 'package:quraan_app1/Pages/Home/App/Qiblah/Screens/qiblah_page.dart';
 
 import '../../../Core/Constant/color_app.dart';
 import '../../../Core/Widget/create_slide_transation.dart';
@@ -13,6 +12,7 @@ import '../../Start/Screens/start_page.dart';
 import '../App/Azkar/AzkaarPage/Screens/azkaar_page.dart';
 import '../App/PrayerPage/Screens/prayer_page.dart';
 import '../App/Quraan/InnerPage/Screens/inner_page_quraan.dart';
+import '../Widgets/three_elevated_buttom.dart';
 
 class HomePage extends StatelessWidget {
   final String? username;
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
 
           return Scaffold(
             key: _scaffoldKey,
-            drawer: _buildDrawer(context),
+            drawer: buildDrawer(context),
             body: _buildBody(context, currentPosition),
             bottomNavigationBar: _buildBottomNavigationBar(context),
           );
@@ -79,28 +79,32 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawer(BuildContext context) {
+  Widget buildDrawer(BuildContext context) {
     return Drawer(
       width: MediaQuery.of(context).size.width / 1.2,
       backgroundColor: ColorApp.lightPink,
-      child: Column(
-        children: [
-          IconButton(
-            onPressed: () async {
-              await _signOut(context);
-            },
-            icon: const Icon(
-              size: 50,
-              Icons.logout,
-              color: ColorApp.purple,
+      child: Padding(
+        padding: EdgeInsets.all(MediaQuery.of(context).size.height / 30),
+        child: Column(
+          children: [
+            const ThreeElevatedButtom(),
+            IconButton(
+              onPressed: () async {
+                await signOut(context);
+              },
+              icon: const Icon(
+                size: 50,
+                Icons.logout,
+                color: ColorApp.purple,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Future<void> _signOut(BuildContext context) async {
+  Future<void> signOut(BuildContext context) async {
     await context.read<AudioCubit>().stopAudio();
     await FirebaseAuth.instance.signOut().then((_) {
       if (context.mounted) {
@@ -128,7 +132,6 @@ class HomePage extends StatelessWidget {
             DatePickerPrayerTimes(
               currentPosition: currentPosition,
             ),
-            const QiblahPage()
           ],
         );
       },
@@ -165,11 +168,6 @@ class HomePage extends StatelessWidget {
             .read<BottomNavigationBarCubit>()
             .updateIndex(NavigtionBarItem.prayer);
         break;
-      case 3:
-        context
-            .read<BottomNavigationBarCubit>()
-            .updateIndex(NavigtionBarItem.qiblah);
-        break;
     }
   }
 
@@ -195,13 +193,6 @@ class HomePage extends StatelessWidget {
             ? ColorApp.lightPink
             : ColorApp.heavyPink,
         size: curentItem == NavigtionBarItem.prayer ? 30 : 20,
-      ),
-      Icon(
-        Icons.explore,
-        color: curentItem == NavigtionBarItem.qiblah
-            ? ColorApp.lightPink
-            : ColorApp.heavyPink,
-        size: curentItem == NavigtionBarItem.qiblah ? 30 : 20,
       ),
     ];
   }
